@@ -32,17 +32,11 @@ class StudentController extends Controller
     public function store(Request $request)
 
     {
-
         $input  = $request->all();
-
-        // dd($$request->file('image'));
-
-        // if($image = $request->file('image')){
-        //     $destination  = 'images/';
-        //     $title = date('Ymdhis') .'.'. $image->getClientOriginalExtension();
-        //     $image->move($destination ,$title);
-            
-        // }
+        if($image = $request->file('image')){
+            $title = date('Ymdhis') .'.'. $image->getClientOriginalExtension();
+            $image->move(public_path('images') ,$title);
+        }
         Student::create($input);
         return back();
     }

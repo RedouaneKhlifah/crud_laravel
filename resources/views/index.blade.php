@@ -28,6 +28,9 @@ body {
 	min-width: 1000px;
 	box-shadow: 0 1px 1px rgba(0,0,0,.05);
 }
+/* .w-100{
+	width: 100px;
+} */
 .table-title {        
 	padding-bottom: 15px;
 	background: #435d7d;
@@ -295,8 +298,8 @@ $(document).ready(function(){
 
 						<td>{{$item->name}}</td>
 						<td>{{$item->adress}}</td>
-						<td>{{$item->mobile}}</td>*
-						<td>image</td>
+						<td>{{$item->mobile}}</td>
+						<td><img src="{{ asset('images/20230224033417.jpg') }}" class="w-100" alt="re"></td>
 						<td>
 							<a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="{{ $item->id }}"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
 							<a href="{{url('/delete/'.$item->id )}}" class="delete" ><i class="material-icons" >&#xE872;</i></a>
@@ -313,7 +316,7 @@ $(document).ready(function(){
 <div id="addEmployeeModal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form action="{{ url('student')}}" method="post">
+			<form action="{{ url('student')}}" method="post" enctype="multipart/form-data">
 			{!! csrf_field() !!}
 				<div class="modal-header">						
 					<h4 class="modal-title">Add Employee</h4>
@@ -330,11 +333,11 @@ $(document).ready(function(){
 					</div>
 					<div class="form-group">
 						<label>Phone</label>
-						<input name="mobile" type="text" class="form-control" required>
+						<input name="mobile" type="text" class="form-control" >
 					</div>		
 					<div class="form-group">
 						<label>image</label>
-						<input name="image" id="image" type="file" class="form-control" >
+						<input name="image" id="image" type="file" class="form-control"  >
 					</div>			
 				</div>
 				<div class="modal-footer">
@@ -402,6 +405,7 @@ $(document).on('click', '.edit', function() {
 		$('#Adress').val(response.student.adress);
 		$('#mobile').val(response.student.mobile);
 		$('#id').val(response.student.id);
+		
 
     },
     error: function(xhr, status, error) {
